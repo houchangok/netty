@@ -24,15 +24,30 @@ public interface ChannelInboundHandler extends ChannelHandler {
     /**
      * The {@link Channel} of the {@link ChannelHandlerContext} was registered with its {@link EventLoop}
      */
+    /**
+     * fire chance:当前channel注册到EventLoop
+     * @param ctx
+     * @throws Exception
+     */
     void channelRegistered(ChannelHandlerContext ctx) throws Exception;
 
     /**
      * The {@link Channel} of the {@link ChannelHandlerContext} was unregistered from its {@link EventLoop}
      */
+    /**
+     * fire chance:当前channel从EventLoop取消注册
+     * @param ctx
+     * @throws Exception
+     */
     void channelUnregistered(ChannelHandlerContext ctx) throws Exception;
 
     /**
      * The {@link Channel} of the {@link ChannelHandlerContext} is now active
+     */
+    /**
+     * fire chance : 当前channel活跃的时候
+     * @param ctx
+     * @throws Exception
      */
     void channelActive(ChannelHandlerContext ctx) throws Exception;
 
@@ -40,10 +55,21 @@ public interface ChannelInboundHandler extends ChannelHandler {
      * The {@link Channel} of the {@link ChannelHandlerContext} was registered is now inactive and reached its
      * end of lifetime.
      */
+    /**
+     * fire chance : 当前channel不活跃的时候，也就是当前channel到了它生命周期末
+     * @param ctx
+     * @throws Exception
+     */
     void channelInactive(ChannelHandlerContext ctx) throws Exception;
 
     /**
      * Invoked when the current {@link Channel} has read a message from the peer.
+     */
+    /**
+     * fire chance :当前channel从远端读取到数据
+     * @param ctx
+     * @param msg
+     * @throws Exception
      */
     void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception;
 
@@ -53,16 +79,32 @@ public interface ChannelInboundHandler extends ChannelHandler {
      * attempt to read an inbound data from the current {@link Channel} will be made until
      * {@link ChannelHandlerContext#read()} is called.
      */
+    /**
+     * fire chance : channel read消费完读取的数据的时候被触发
+     * @param ctx
+     * @throws Exception
+     */
     void channelReadComplete(ChannelHandlerContext ctx) throws Exception;
 
     /**
      * Gets called if an user event was triggered.
+     */
+    /**
+     *fire chance:用户事件触发的时候
+     * @param ctx
+     * @param evt
+     * @throws Exception
      */
     void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception;
 
     /**
      * Gets called once the writable state of a {@link Channel} changed. You can check the state with
      * {@link Channel#isWritable()}.
+     */
+    /**
+     * fire chance:channel的写状态变化的时候触发
+     * @param ctx
+     * @throws Exception
      */
     void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception;
 
